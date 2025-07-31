@@ -1,0 +1,54 @@
+
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Suraj@4dec
+      MYSQL_DATABASE: fraud_detection
+    ports:
+      - "3307:3306"            # Host port 3307 mapped to MySQL container port 3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init/init.sql:/docker-entrypoint-initdb.d/init.sql  # SQL to create tables on first start
+
+  backend:
+    build: ./backend
+    container_name: backend
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql         # Use the service name to connect within Docker network
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Suraj@4dec
+      MYSQL_DB: fraud_detection
+    ports:
+      - "5000:5000"              # Expose backend API port
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    depends_on:
+      - backend
+      - mysql
+    environment:
+      API_URL: http://backend:5000/predict  # Backend API URL inside Docker network
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Suraj@4dec
+      MYSQL_DB: fraud_detection
+    ports:
+      - "8501:8501"             # Streamlit frontend port
+    volumes:
+      - ./frontend:/app
+    restart: always
+
+volumes:
+  mysql_data:
