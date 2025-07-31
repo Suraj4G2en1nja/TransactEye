@@ -2,7 +2,7 @@
 
 **TransactEye** is a fraud monitoring application designed to track and predict fraudulent transactions efficiently.
 
-## Features
+## Features:
 
 - **User-friendly UI with Dashboard**  
   Interactive and intuitive dashboard interface for easy monitoring and management of transactions.
@@ -16,10 +16,17 @@
 - **Transaction History Management**  
   Allows users to select and delete any transaction entry directly from the history table for better data control.
 
-## Applications
+## Skills Used : Python,Flask,Streamlit,MySQL,Docker,ML.
+
+## Applications:
 
 - Real-time fraud detection in banking and financial transactions.
 - Monitoring digital payments for suspicious or fraudulent activities.
 - Assisting compliance teams with detailed transaction tracking and audit logs.
 - Enhancing security frameworks in e-commerce platforms.
 - Providing actionable insights to reduce financial losses due to fraud.
+
+## Demo video is uploaded  in files.
+
+
+
